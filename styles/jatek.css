@@ -132,7 +132,7 @@ body {
 
 #restart {
     position: absolute;
-    bottom: 40px;
+    bottom: 25px;
     left: 500px;
     -webkit-text-stroke: 3px rgb(56, 106, 187); /* width and color */
     color: rgb(255, 204, 3);

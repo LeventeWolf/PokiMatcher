@@ -5,11 +5,11 @@
 
 let kartyak = [];
 
-let kartyaszam = 4;
+let kartyaszam = 18; // restar_game()-ben is át kell írni
 let matched = 0;
 
 let timer_interval;
-let seconds = 100;
+let seconds = 100; // restar_game()-ben is át kell írni
 
 let players = [];
 
@@ -81,7 +81,7 @@ function play_game() {
 
 function restart_game() {
     kartyak = [];
-    kartyaszam = 4;
+    kartyaszam = 18;
     matched = 0;
 
     clearInterval(timer_interval);
@@ -206,17 +206,19 @@ function defeat() {
         $('#victory').hide();
     }
 
-    add_player_to_toplist();
+    // add_player_to_toplist();
+
+    fill_toplist();
 
     show();
 }
 
 function victory() {
-    add_player_to_toplist();
+    // add_player_to_toplist();
+
+    fill_toplist();
 
     show();
-
-    console.log(players)
 
     clearInterval(timer_interval);
 
@@ -278,26 +280,27 @@ function kartyak_kirajzolasa() {
     }
 }
 
-function add_player_to_toplist() {
-
-    /**
-     * Class that represents a Player
-     * Which has: name, points
-     */
-    class Player {
-        constructor(name, point) {
-            this.name = player_name;
-            this.point = point;
-            // this.seconds_left = seconds_left;
-            // this.matched_pokimons = matched_pokimons;
-        }
+/**
+ * Class that represents a Player
+ * Which has: name, points
+ */
+class Player {
+    constructor(player_name, point) {
+        this.name = player_name;
+        this.point = point;
+        // this.seconds_left = seconds_left;
+        // this.matched_pokimons = matched_pokimons;
     }
+}
 
+function add_player_to_toplist2() {
     let player_name = document.getElementById('input-mezo').value;
     let player_point = calculate_player_point();
 
     let player = new Player(player_name, player_point);
-    players.push(player)
+
+    localStorage.setItem(player_name, player_point);
+    // players.push(player)
 
     function compare(player1, player2) {
         if (player1.point < player2.point) {
@@ -308,7 +311,6 @@ function add_player_to_toplist() {
             return 0;
         }
     }
-
 
     let table = $('#ranglista');
 
@@ -324,7 +326,7 @@ function add_player_to_toplist() {
 
     players.sort(compare);
 
-    for (let i = 0; i < players.length; i++) {
+    for (let i = 0; i < localStorage.length; i++) { //players.length
         if (i === 3) break;
         let player_rank = i + 1;
         let player = players[i];
@@ -351,7 +353,111 @@ function add_player_to_toplist() {
 
     row.append(rank).append(name).append(point)
     $('#player-point-table').append(row)
+}
 
+function fill_toplist() {
+    clear_toplist_view();
+
+    add_player_to_toplist();
+
+    fill_toplist_first_three();
+    fill_toplist_player();
+}
+
+function clear_toplist_view() {
+    let table = $('#ranglista');
+
+    table.empty();
+
+    table.append(
+        $('<tr>' +
+            '<th>Rank</th>' +
+            '<th>Name</th>' +
+            '<th>Point</th>' +
+            '</tr>')
+    );
+}
+
+function add_player_to_toplist() {
+    let player_name = document.getElementById('input-mezo').value;
+    let player_point = calculate_player_point();
+
+    localStorage.setItem(player_name, player_point);
+}
+
+function fill_toplist_first_three() {
+    // DUPLICATE
+    let players = [];
+
+    console.log(players);
+
+    for (let i = 0; i < localStorage.length; i++) {
+        let player = new Player(localStorage.key(i), parseInt(localStorage.getItem(localStorage.key(i))));
+        players[i] = player;
+    }
+    players.sort(compare);
+    function compare(player1, player2) {
+        if (player1.point < player2.point) {
+            return 1;
+        } else if (player1.point > player2.point) {
+            return -1
+        } else {
+            return 0;
+        }
+    }
+
+    for (let i = 0; i < players.length; i++) {
+        if (i === 3) break;
+
+        let player_rank = i + 1;
+        let player = players[i];
+
+        let row = $('<tr class="row"></tr>')
+        let rank = $('<td class="rank"></td>').append(player_rank.toString() + ".");
+        let name = $('<td class="name"></td>').append(player.name);
+        let point = $('<td class="point"></td>').append(player.point);
+
+        row.append(rank).append(name).append(point)
+        $('#ranglista').append(row);
+    }
+}
+
+function fill_toplist_player() {
+    // DUPLICATE
+    let players = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        let player = new Player(localStorage.key(i), parseInt(localStorage.getItem(localStorage.key(i))));
+        players[i] = player;
+    }
+    players.sort(compare);
+    function compare(player1, player2) {
+        if (player1.point < player2.point) {
+            return 1;
+        } else if (player1.point > player2.point) {
+            return -1
+        } else {
+            return 0;
+        }
+    }
+
+    let player_name = document.getElementById('input-mezo').value;
+    let player_point = calculate_player_point();
+    let player = new Player(player_name, player_point);
+
+    let player_rank = 0;
+    for (let $player of players) {
+        player_rank++;
+        if ($player.name === player_name) break;
+    }
+
+    $('#player-point-table').empty();
+    let row = $('<tr class="row"></tr>')
+    let rank = $('<td class="rank"></td>').append(player_rank.toString() + ".");
+    let name = $('<td class="name"></td>').append(player.name);
+    let point = $('<td class="point"></td>').append(player.point);
+
+    row.append(rank).append(name).append(point)
+    $('#player-point-table').append(row)
 }
 
 /**
