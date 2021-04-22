@@ -1,0 +1,143 @@
+@font-face {
+    font-family: Pokemon;
+    src: url("../media/pokemon-font.woff2");
+}
+
+body {
+    background-image: url("../kepek/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*overflow: hidden;*/
+    margin-top: -50px;
+    cursor: url('../kepek/closed.png'), auto;
+}
+
+
+
+#main {
+    width: 1000px;
+    margin: 50px auto;
+}
+
+#game-info {
+    padding: 30px;
+    height: 80px;
+    background-color: rgba(188, 143, 143, 0.8);
+    border: 3px solid olivedrab;
+    border-radius: 50px 50px 0 0;
+
+    display: flex;
+    align-items: center;
+}
+
+#timer, #matched {
+    font-size: 2rem;
+    flex-grow: 1;
+    width: 300px;
+
+    font-family: Pokemon;
+    -webkit-text-stroke: 1px rgb(56, 106, 187); /* width and color */
+
+    color: rgb(255, 204, 3);
+}
+
+#end-status-wrapper {
+    text-align: center;
+    flex-grow: 3;
+    width: 100%;
+    display: none;
+}
+
+#input-wrapper {
+    text-align: center;
+    flex-grow: 3;
+    width: 100%;
+}
+
+#input-kep, #input-mezo {
+    font-size: 2rem;
+    flex-grow: 1;
+    width: 400px;
+}
+
+
+
+#victory, #defeat {
+    position: relative;
+}
+
+#title-wrapper {
+    width: 100%;
+    /*border: 3px solid blue;*/
+    text-align: center;
+}
+
+#gameArea {
+    width: 994px;
+    height: 600px;
+    border: 3px solid yellowgreen;
+    padding: 50px 0 0 0;
+    display: grid;
+    grid-template-columns: repeat(6, 120px);
+    grid-template-rows: repeat(6, 180px);
+    grid-gap: 5px;
+    justify-content: center;
+
+    background-color: rgba(9, 48, 157, 0.6);
+    border-radius: 0 0 50px 50px;
+}
+
+
+
+
+.kartya {
+    width: 100px;
+    height: 150px;
+    border: 2px solid black;
+    border-radius: 10px;
+    position: relative;
+    azonosito: 0;
+
+    /*Flip animation*/
+    perspective: 1000px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+
+
+
+}
+
+.kartya:hover {
+    border: 2px solid rgba(0, 0, 0, 0.0001);
+    cursor: url('../kepek/half-open.png'), auto;
+
+}
+
+.rotation {
+    transform: rotateY(180deg);
+}
+
+#input-mezo {
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(9, 48, 157, 0.6);
+    text-overline: none;
+    color: rgb(255, 204, 3);
+    padding-left: 10px;
+    outline: none;
+
+    -webkit-text-stroke: 1px rgb(56, 106, 187); /* width and color */
+    font-family: Pokemon;
+}
+
+#restart {
+    position: absolute;
+    bottom: 40px;
+    left: 500px;
+    -webkit-text-stroke: 3px rgb(56, 106, 187); /* width and color */
+    color: rgb(255, 204, 3);
+    font-size: 40px;
+    cursor: pointer;
+    font-family: Pokemon;
+}
+

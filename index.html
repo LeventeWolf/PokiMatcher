@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PokimonMatcher</title>
+    <script src="jquery-3.2.0.min.js"></script>
+    <script src="gamearea.js"></script>
+    <link rel="stylesheet" href="styles/jatek.css"/>
+    <link rel="stylesheet" href="styles/aside.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="kepek/logo.png" />
+</head>
+<body>
+
+<audio autoplay preload='auto' loop id="background_music">
+    <source src="media/music.mp3" type="audio/mpeg" >
+</audio>
+
+<main id="main">
+    <div id="title-wrapper">
+        <img src="kepek/title.png" id="title" alt="title.png"/>
+    </div>
+    <div id="game-info">
+        <h2 id="timer"></h2>
+        <div id="end-status-wrapper">
+            <img src="kepek/victroy.png" id="victory" alt="victory.png"/>
+            <img src="kepek/defeat.png" id="defeat" alt="defeat.png"/>
+        </div>
+        <div id="input-wrapper">
+            <img src="kepek/input.png" id="input-kep" alt="inputkep.png"/>
+            <input type="name" id="input-mezo" placeholder="your name">
+        </div>
+        <h2 id="matched"></h2>
+    </div>
+    <div id="gameArea">
+
+    <div id="restart">
+        Restart
+    </div>
+    </div>
+</main>
+
+<aside>
+    <div id="toplista">
+        <div id="toplista-title-wrapper">
+            <img src="kepek/toplista.png" id="toplista-title" alt="toplista.png"/>
+        </div>
+        <hr>
+        <table id="ranglista" style="width:100%">
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Point</th>
+            </tr>
+        </table>
+
+        <div id="player-point" style="width: 400px">
+            <hr style="width: 95%" align="left">
+            <table id="player-point-table" style="width: 100%">
+
+            </table>
+        </div>
+    </div>
+</aside>
+
+
+
+
+
+
+</body>
+</html>
