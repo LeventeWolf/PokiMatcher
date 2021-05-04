@@ -42,9 +42,9 @@ $(document).ready(function () {
 });
 
 function play_game() {
-    kartyaszam = 18;
+    kartyaszam = 2;
     matched = 0;
-    seconds = 100;
+    seconds = 3;
     kartyak = [];
 
     $('#restart').on('click', restartClick);
@@ -114,10 +114,10 @@ function init_game_area() {
 }
 
 function defeat() {
+    defeat_sound = new sound("media/defeat.mp4")
+    defeat_sound.play();
     background_sound.stop();
     is_backdround_music_started = false;
-
-    show_defeat();
 
     init_toplist();
 
@@ -125,16 +125,23 @@ function defeat() {
     flip_on_cards();
 
     clearInterval(timer_interval);
+    timer_interval = null;
 
     kartyak = [];
 
+    show_defeat();
 
     function show_defeat() {
-        $('#victory').hide();
+        $('#end-status-wrapper').show();
+        $('#end-status-wrapper').empty();
+        let defeat = $('<img src="kepek/defeat.png" id="defeat" alt="defeat.png"/>');
+        $('#end-status-wrapper').append(defeat);
+        setInterval(function () {
+            $('#defeat').animate({width: '50%'}, 500).animate({width: '40%'}, 500);
+        }, 500);
+
         $('#timer').text('Time is over!');
         $('#input-wrapper').hide();
-        $('#end-status-wrapper').show();
-        $('#defeat').show();
     }
 }
 
@@ -163,11 +170,12 @@ function victory() {
 
     function show_victory() {
         $('#end-status-wrapper').show();
-        $('#victory').show();
+        $('#end-status-wrapper').empty();
+        let victory = $('<img src="kepek/victroy.png" id="victory" alt="victroy.png"/>');
+        $('#end-status-wrapper').append(victory);
         setInterval(function () {
             $('#victory').animate({width: '50%'}, 500).animate({width: '40%'}, 500);
         }, 500);
-        $('#defeat').hide();
         $('#input-wrapper').hide();
         $('#toplista').show();
     }
@@ -176,6 +184,7 @@ function victory() {
 function check_victory() {
     if (matched === kartyaszam / 2) {
         victory();
+
     }
 }
 

@@ -62,8 +62,6 @@ function clear_toplist_view() {
  * Overrides old points
  * */
 function add_player_to_localStorage() {
-    console.log(player_name);
-
     if (player_name.length === 0) player_name = "anonymus";
 
     let player_point = calculate_player_point();
