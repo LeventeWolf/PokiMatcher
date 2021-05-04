@@ -4,7 +4,7 @@
  */
 
 
-let kartyaszam;
+let number_of_cards;
 let matched;
 
 let timer_interval;
@@ -46,9 +46,9 @@ $(document).ready(function () {
 });
 
 function play_game() {
-    kartyaszam = 4;
+    number_of_cards = 18;
     matched = 0;
-    seconds = 15;
+    seconds = 100;
     cards = [];
 
     $('#restart').on('click', restartClick);
@@ -200,7 +200,7 @@ function victory() {
 }
 
 function check_victory() {
-    if (matched === kartyaszam / 2) {
+    if (matched === number_of_cards / 2) {
         victory();
 
     }

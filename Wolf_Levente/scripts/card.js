@@ -15,7 +15,7 @@ function init_cards() {
      * Shuffle Cards Array with The Fisher-Yates algorithm
      */
     function shuffle() {
-        for (var i = 0; i < kartyaszam / 2; i++) {
+        for (var i = 0; i < number_of_cards / 2; i++) {
             var index = i + Math.floor(Math.random() * (cards.length - i));
 
             var tmp = cards[i];
@@ -30,7 +30,7 @@ function give_all_cards_background_image_number() {
     let index = 0;
 
     let card_numbers = [];
-    while (card_numbers.length !== kartyaszam / 2) {
+    while (card_numbers.length !== number_of_cards / 2) {
         var random_kepszam = Math.floor(Math.random() * (20)) + 1;
 
         if (!card_numbers.includes(random_kepszam)) {
@@ -196,23 +196,23 @@ function remove_onClick(card) {
  * Display all the cards in the game_area
  */
 function show_cards() {
-    for (let kartya of cards) {
-        game_area.append(kartya);
+    for (let card of cards) {
+        game_area.append(card);
     }
 }
 
 function flip_on_cards() {
-    for (let kartya of cards) {
+    for (let card of cards) {
         setTimeout(function () {
-            face_up_card(kartya);
+            face_up_card(card);
         }, 500);
     }
 }
 
 function flip_off_cards() {
-    for (let kartya of cards) {
+    for (let card of cards) {
         setTimeout(function () {
-            face_down_card(kartya);
+            face_down_card(card);
         }, 2000);
     }
 }
