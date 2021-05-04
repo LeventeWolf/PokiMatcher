@@ -58,7 +58,11 @@ function cardClick() {
         start_timer();
     }
 
-    let card = $(this)
+    if (!is_backdround_music_started) {
+        start_background_music();
+    }
+
+    let card = $(this);
 
     if (!is_this_card_already_facing_up(felforditottak)) {
         face_up_card(card);
@@ -126,6 +130,12 @@ function cardClick() {
 
         return card.attr('id') === matched_cards[0].attr('id');
     }
+}
+
+function start_background_music() {
+    background_sound = new sound("media/music.mp3");
+    background_sound.play();
+    is_backdround_music_started = true;
 }
 
 function start_timer() {

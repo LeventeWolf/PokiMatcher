@@ -14,10 +14,13 @@ let game_area;
 
 var victory_sound;
 var click_sound;
-var background_sound;
 var defeat_sound;
+var background_sound;
+
 
 let player_name;
+
+var is_backdround_music_started = false;
 
 function sound(src) {
     this.sound = document.createElement("audio");
@@ -34,15 +37,7 @@ function sound(src) {
     }
 }
 
-function init_sounds() {
-
-
-    background_sound = new sound("media/music.mp3");
-}
-
 $(document).ready(function () {
-    init_sounds();
-
     play_game()
 });
 
@@ -61,8 +56,6 @@ function play_game() {
 
     show(player_name);
 
-    background_sound.stop();
-
     function show(player_name) {
         $('#player-name').text(player_name);
     }
@@ -73,7 +66,6 @@ function init_player_name() {
 }
 
 function restartClick() {
-
     reset_timer();
 
     clear_game_area();
@@ -82,6 +74,9 @@ function restartClick() {
 
     $('#input-wrapper').show();      //show enter your name field
     play_game(); //start the game again
+
+    background_sound.stop();
+    is_backdround_music_started = false;
 
     /**
      * clear timer interval
@@ -101,8 +96,8 @@ function init_game_area() {
     init_timer_label();
     init_matched_pokies_label();
 
-
     init_kartyak_tomb();
+
     show_cards();
 
     // flip_on_cards();
@@ -119,9 +114,8 @@ function init_game_area() {
 }
 
 function defeat() {
-    defeat_sound = new sound("media/defeat.mp4")
-    defeat_sound.play();
     background_sound.stop();
+    is_backdround_music_started = false;
 
     show_defeat();
 
@@ -155,6 +149,8 @@ function victory() {
     victory_sound = new sound("media/victory.mp4")
     victory_sound.play();
     background_sound.stop();
+    is_backdround_music_started = false;
+
 
     init_toplist();
 
