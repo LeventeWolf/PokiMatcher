@@ -46,9 +46,9 @@ $(document).ready(function () {
 });
 
 function play_game() {
-    kartyaszam = 2;
+    kartyaszam = 18;
     matched = 0;
-    seconds = 3;
+    seconds = 100;
     kartyak = [];
 
     $('#restart').on('click', restartClick);
