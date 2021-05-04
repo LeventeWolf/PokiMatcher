@@ -29,10 +29,10 @@ function sound(src) {
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
     document.body.appendChild(this.sound);
-    this.play = function(){
+    this.play = function () {
         this.sound.play();
     }
-    this.stop = function(){
+    this.stop = function () {
         this.sound.pause();
     }
 }
@@ -81,7 +81,7 @@ function restartClick() {
     /**
      * clear timer interval
      */
-    function reset_timer(){
+    function reset_timer() {
         clearInterval(timer_interval);
         timer_interval = null;
     }
