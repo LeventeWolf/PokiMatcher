@@ -57,7 +57,7 @@ function cardClick() {
         start_timer();
     }
 
-    if (!is_backdround_music_started) {
+    if (!is_background_music_started) {
         start_background_music();
     }
 
@@ -134,7 +134,7 @@ function cardClick() {
 function start_background_music() {
     background_sound = new sound("media/music.mp3");
     background_sound.play();
-    is_backdround_music_started = true;
+    is_background_music_started = true;
 }
 
 function start_timer() {

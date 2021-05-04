@@ -17,10 +17,9 @@ var click_sound;
 var defeat_sound;
 var background_sound;
 
-
 let player_name;
 
-var is_backdround_music_started = false;
+var is_background_music_started = false;
 
 function sound(src) {
     this.sound = document.createElement("audio");
@@ -35,6 +34,11 @@ function sound(src) {
     this.stop = function () {
         this.sound.pause();
     }
+}
+
+function init_sound() {
+    defeat_sound = new sound("media/defeat.mp4")
+    victory_sound = new sound("media/victory.mp4")
 }
 
 $(document).ready(function () {
@@ -52,6 +56,8 @@ function play_game() {
 
     init_game_area();
 
+    init_sound();
+
     init_player_name();
 
     show(player_name);
@@ -66,6 +72,9 @@ function init_player_name() {
 }
 
 function restartClick() {
+    victory_sound.stop();
+    defeat_sound.stop();
+
     reset_timer();
 
     clear_game_area();
@@ -76,7 +85,8 @@ function restartClick() {
     play_game(); //start the game again
 
     background_sound.stop();
-    is_backdround_music_started = false;
+
+    is_background_music_started = false;
 
     /**
      * clear timer interval
@@ -114,10 +124,9 @@ function init_game_area() {
 }
 
 function defeat() {
-    defeat_sound = new sound("media/defeat.mp4")
     defeat_sound.play();
     background_sound.stop();
-    is_backdround_music_started = false;
+    is_background_music_started = false;
 
     init_toplist();
 
@@ -153,10 +162,9 @@ function check_defeat() {
 }
 
 function victory() {
-    victory_sound = new sound("media/victory.mp4")
     victory_sound.play();
     background_sound.stop();
-    is_backdround_music_started = false;
+    is_background_music_started = false;
 
 
     init_toplist();
