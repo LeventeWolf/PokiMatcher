@@ -21,32 +21,32 @@ function init_toplist() {
     show_toplist_top_three_players();
     show_toplist_current_player();
 
-    function init_players_from_localStorage_in_ascending_order() {
-        for (let i = 0; i < localStorage.length; i++) {
-            let player = new Player(localStorage.key(i), parseInt(localStorage.getItem(localStorage.key(i))));
-            players[i] = player;
-        }
-        players.sort(compare);
+}
 
-        function compare(player1, player2) {
-            if (player1.point < player2.point) {
-                return 1;
-            } else if (player1.point > player2.point) {
-                return -1
-            } else {
-                return 0;
-            }
+function init_players_from_localStorage_in_ascending_order() {
+    for (let i = 0; i < localStorage.length; i++) {
+        let player = new Player(localStorage.key(i), parseInt(localStorage.getItem(localStorage.key(i))));
+        players[i] = player;
+    }
+
+    players.sort(compare);
+
+    function compare(player1, player2) {
+        if (player1.point < player2.point) {
+            return 1;
+        } else if (player1.point > player2.point) {
+            return -1
+        } else {
+            return 0;
         }
     }
 }
 
-/**
- * Remove all child element from toplist (table)
- */
 function clear_toplist_view() {
     let table = $('#ranglista');
 
     table.empty();
+    $('#player-point-table').empty();
 
     table.append(
         $('<tr>' +
@@ -71,7 +71,7 @@ function add_player_to_localStorage() {
 
 /**
  * Display the top 3 player in the toplist
- * */
+ */
 function show_toplist_top_three_players() {
     for (let i = 0; i < players.length; i++) {
         if (i === 3) break;
@@ -91,9 +91,9 @@ function show_toplist_top_three_players() {
 
 /**
  * Display the player point in the bottom of the toplist
- * */
+ */
 function show_toplist_current_player() {
-    if (player_name.length === 0) player_name = "guest";
+    if (player_name.length === 0) player_name = "anonymus";
 
     let player_point = calculate_player_point();
 

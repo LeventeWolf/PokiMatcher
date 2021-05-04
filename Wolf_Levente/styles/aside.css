@@ -30,7 +30,6 @@ table, tr, td {
     font-family: Pokemon;
     font-size: 2rem;
 
-    /*border: 2px solid black;*/
     text-align: center;
 }
 
@@ -44,7 +43,6 @@ td {
 
 
 #player-point {
-
     position: absolute;
     bottom: 0;
 }

@@ -46,10 +46,10 @@ $(document).ready(function () {
 });
 
 function play_game() {
-    kartyaszam = 18;
+    kartyaszam = 4;
     matched = 0;
-    seconds = 100;
-    kartyak = [];
+    seconds = 15;
+    cards = [];
 
     $('#restart').on('click', restartClick);
     game_area = $('#gameArea');
@@ -62,8 +62,18 @@ function play_game() {
 
     show(player_name);
 
+    init_toplist();
+
     function show(player_name) {
         $('#player-name').text(player_name);
+    }
+
+    function init_toplist() {
+        clear_toplist_view();
+
+        init_players_from_localStorage_in_ascending_order();
+
+        show_toplist_top_three_players();
     }
 }
 
@@ -106,7 +116,7 @@ function init_game_area() {
     init_timer_label();
     init_matched_pokies_label();
 
-    init_kartyak_tomb();
+    init_cards();
 
     show_cards();
 
@@ -136,7 +146,7 @@ function defeat() {
     clearInterval(timer_interval);
     timer_interval = null;
 
-    kartyak = [];
+    cards = [];
 
     show_defeat();
 
@@ -174,7 +184,7 @@ function victory() {
     clearInterval(timer_interval);
     timer_interval = null;
 
-    kartyak = [];
+    cards = [];
 
     function show_victory() {
         $('#end-status-wrapper').show();

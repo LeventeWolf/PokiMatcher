@@ -7,11 +7,9 @@ body {
     background-image: url("../kepek/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    /*overflow: hidden;*/
     margin-top: -50px;
     cursor: url('../kepek/closed.png'), auto;
 }
-
 
 
 #main {
@@ -66,7 +64,6 @@ body {
 }
 
 
-
 #victory, #defeat {
     position: relative;
 }
@@ -92,47 +89,23 @@ body {
     border-radius: 0 0 50px 50px;
 }
 
-
-
-
-.kartya {
+.card{
     width: 100px;
     height: 150px;
     border: 2px solid black;
     border-radius: 10px;
     position: relative;
-    azonosito: 0;
 
-    /*Flip animation*/
-    perspective: 1000px;
     transition: transform 0.8s;
-    transform-style: preserve-3d;
-
-
-
 }
 
-.kartya:hover {
+.card:hover {
     border: 2px solid rgba(0, 0, 0, 0.0001);
     cursor: url('../kepek/half-open.png'), auto;
-
 }
 
 .rotation {
     transform: rotateY(180deg);
-}
-
-#input-mezo {
-    border: none;
-    border-radius: 20px;
-    background-color: rgba(9, 48, 157, 0.6);
-    text-overline: none;
-    color: rgb(255, 204, 3);
-    padding-left: 10px;
-    outline: none;
-
-    -webkit-text-stroke: 1px rgb(56, 106, 187); /* width and color */
-    font-family: Pokemon;
 }
 
 #restart {

@@ -1,54 +1,58 @@
-let kartyak = [];
-let felforditottak = [];
+let cards = [];
+let faced_up_cards = [];
+let number_of_faced_up_cards = 0;
 
-let felforditottak_db = 0;
+function init_cards() {
+    give_all_cards_background_image_number();
 
-function init_kartyak_tomb() {
-    let index = 0;
-
-    let kartyaszamok = [];
-    while (kartyaszamok.length !== kartyaszam / 2) {
-        var random_kepszam = Math.floor(Math.random() * (20)) + 1;
-
-        if (!kartyaszamok.includes(random_kepszam)) {
-            kartyaszamok.push(random_kepszam);
-        }
-    }
-
-    for (let i = 0; i < kartyaszamok.length; i++) {
-        kartya = $('<img src="kepek/hatlap2.png" class="kartya">');
-        kartya2 = $('<img src="kepek/hatlap2.png" class="kartya">');
-
-        kartya.attr('szam', kartyaszamok[i]);
-        kartya2.attr('szam', kartyaszamok[i]);
-
-
-        kartyak[index++] = kartya;
-        kartyak[index++] = kartya2;
-    }
-
-    //Az összes kártyához egyedi azonosító rendelése, oka: ellenőrzés hogy saját magára ne kattinstunk
-    for (let i = 0; i < kartyak.length; i++) {
-        kartyak[i].attr('id', i + 1);
-    }
+    give_all_cards_unique_id();
 
     enable_all_card_onClick();
 
-    shuffle(kartyak);
+    shuffle(cards);
 
     /**
      * Shuffle Cards Array with The Fisher-Yates algorithm
      */
     function shuffle() {
         for (var i = 0; i < kartyaszam / 2; i++) {
-            // random tömbelem kiválasztása
-            var index = i + Math.floor(Math.random() * (kartyak.length - i));
-            // felcserélés az aktuális indexű elemmel
-            var tmp = kartyak[i];
-            kartyak[i] = kartyak[index];
-            kartyak[index] = tmp;
+            var index = i + Math.floor(Math.random() * (cards.length - i));
+
+            var tmp = cards[i];
+            cards[i] = cards[index];
+            cards[index] = tmp;
         }
-        return kartyak;
+        return cards;
+    }
+}
+
+function give_all_cards_background_image_number() {
+    let index = 0;
+
+    let card_numbers = [];
+    while (card_numbers.length !== kartyaszam / 2) {
+        var random_kepszam = Math.floor(Math.random() * (20)) + 1;
+
+        if (!card_numbers.includes(random_kepszam)) {
+            card_numbers.push(random_kepszam);
+        }
+    }
+
+    for (let i = 0; i < card_numbers.length; i++) {
+        card = $('<img src="kepek/hatlap2.png" class="card">');
+        card2 = $('<img src="kepek/hatlap2.png" class="card">');
+
+        card.attr('szam', card_numbers[i]);
+        card2.attr('szam', card_numbers[i]);
+
+        cards[index++] = card;
+        cards[index++] = card2;
+    }
+}
+
+function give_all_cards_unique_id() {
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].attr('id', i + 1);
     }
 }
 
@@ -63,32 +67,32 @@ function cardClick() {
 
     let card = $(this);
 
-    if (!is_this_card_already_facing_up(felforditottak)) {
+    if (!is_this_card_already_facing_up(faced_up_cards)) {
         face_up_card(card);
-        felforditottak_db += 1;
-        felforditottak.push(card);
+        number_of_faced_up_cards += 1;
+        faced_up_cards.push(card);
 
         play_click_sound();
     }
 
-    if (felforditottak_db === 2) {
+    if (number_of_faced_up_cards === 2) {
         remove_all_card_onClick();
 
-        if (is_flipped_cards_match(felforditottak[0], felforditottak[1])) {
+        if (is_flipped_cards_match(faced_up_cards[0], faced_up_cards[1])) {
             play_matched_sound();
-            remove_onClick_from_matched_cards(felforditottak);
-            add_matched_cards_new_look(felforditottak);
+            remove_onClick_from_matched_cards(faced_up_cards);
+            add_matched_cards_new_look(faced_up_cards);
             enable_all_card_onClick();
             increment_matched_pokies();
             check_victory();
 
-            felforditottak_db = 0;
-            felforditottak = [];
+            number_of_faced_up_cards = 0;
+            faced_up_cards = [];
         } else {
             setTimeout(function () {
-                face_down_not_matched_cards(felforditottak);
-                felforditottak_db = 0;
-                felforditottak = [];
+                face_down_not_matched_cards(faced_up_cards);
+                number_of_faced_up_cards = 0;
+                faced_up_cards = [];
                 enable_all_card_onClick();
             }, 1000);
         }
@@ -168,13 +172,13 @@ function is_card_facing_up(card) {
 }
 
 function remove_all_card_onClick() {
-    for (let card of kartyak) {
+    for (let card of cards) {
         remove_onClick(card);
     }
 }
 
 function enable_all_card_onClick() {
-    for (let card of kartyak) {
+    for (let card of cards) {
         if (is_card_facing_down(card))
             enable_onClick(card);
     }
@@ -192,13 +196,13 @@ function remove_onClick(card) {
  * Display all the cards in the game_area
  */
 function show_cards() {
-    for (let kartya of kartyak) {
+    for (let kartya of cards) {
         game_area.append(kartya);
     }
 }
 
 function flip_on_cards() {
-    for (let kartya of kartyak) {
+    for (let kartya of cards) {
         setTimeout(function () {
             face_up_card(kartya);
         }, 500);
@@ -206,7 +210,7 @@ function flip_on_cards() {
 }
 
 function flip_off_cards() {
-    for (let kartya of kartyak) {
+    for (let kartya of cards) {
         setTimeout(function () {
             face_down_card(kartya);
         }, 2000);
