@@ -123,7 +123,7 @@ function calculate_player_point() {
     return second_left * matched;
 }
 
-function calculate_player_rank(my_player){
+function calculate_player_rank(my_player) {
     let player_rank = 0;
     for (let other_player of players) {
         player_rank++;

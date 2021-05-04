@@ -52,7 +52,6 @@ function init_kartyak_tomb() {
     }
 }
 
-
 function cardClick() {
     if (!check_victory() && !check_defeat()) {
         start_timer();
@@ -139,7 +138,7 @@ function start_background_music() {
 }
 
 function start_timer() {
-    if (timer_interval == null){
+    if (timer_interval == null) {
         timer_interval = setInterval(function () {
             $('#timer').text('Time left: ' + --seconds);
             check_defeat();
@@ -164,7 +163,7 @@ function is_card_facing_down(card) {
     return card.attr('src') === 'kepek/hatlap2.png';
 }
 
-function is_card_facing_up(card){
+function is_card_facing_up(card) {
     return card.attr('src') !== 'kepek/hatlap2.png';
 }
 
@@ -174,7 +173,7 @@ function remove_all_card_onClick() {
     }
 }
 
-function enable_all_card_onClick(){
+function enable_all_card_onClick() {
     for (let card of kartyak) {
         if (is_card_facing_down(card))
             enable_onClick(card);
@@ -220,7 +219,7 @@ function face_down_card(card) {
     $('.card:hover').css({cursor: 'url(kepek/closed.png), auto'})
 }
 
-function face_up_card(card){
+function face_up_card(card) {
     var cardID = card.attr('szam');
     card.attr('src', 'kepek/pokimonok/kep' + cardID + '.png');
     card.addClass('rotation');
