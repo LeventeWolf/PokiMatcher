@@ -48,11 +48,3 @@ td {
     position: absolute;
     bottom: 0;
 }
-
-@media (max-width: 1800px) {
-    #toplista {
-        display: none;
-    }
-}
-
-

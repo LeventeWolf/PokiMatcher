@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>PokimonMatcher</title>
-    <script src="jquery-3.2.0.min.js"></script>
-    <script src="gamearea.js"></script>
+    <script src="scripts/jquery-3.2.0.min.js"></script>
+    <script src="scripts/gamearea.js"></script>
+    <script src="scripts/toplist.js"></script>
+    <script src="scripts/card.js"></script>
     <link rel="stylesheet" href="styles/jatek.css"/>
     <link rel="stylesheet" href="styles/aside.css"/>
-    <link rel="shortcut icon" type="image/x-icon" href="kepek/logo.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="kepek/logo.png"/>
 </head>
 <body>
-
-<audio autoplay preload='auto' loop id="background_music">
-    <source src="media/music.mp3" type="audio/mpeg" >
-</audio>
 
 <main id="main">
     <div id="title-wrapper">
@@ -26,16 +24,17 @@
             <img src="kepek/defeat.png" id="defeat" alt="defeat.png"/>
         </div>
         <div id="input-wrapper">
-            <img src="kepek/input.png" id="input-kep" alt="inputkep.png"/>
-            <input type="name" id="input-mezo" placeholder="your name">
+            <label id="player-name"> </label>
+            <!--<img src="kepek/input.png" id="input-kep" alt="inputkep.png"/>-->
+            <!--<input type="name" id="input-mezo" placeholder="your name">-->
         </div>
         <h2 id="matched"></h2>
     </div>
     <div id="gameArea">
 
-    <div id="restart">
-        Restart
-    </div>
+        <div id="restart">
+            Restart
+        </div>
     </div>
 </main>
 
@@ -61,10 +60,6 @@
         </div>
     </div>
 </aside>
-
-
-
-
 
 
 </body>

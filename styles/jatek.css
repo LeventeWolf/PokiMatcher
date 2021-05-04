@@ -30,7 +30,7 @@ body {
     align-items: center;
 }
 
-#timer, #matched {
+#timer, #matched, #player-name {
     font-size: 2rem;
     flex-grow: 1;
     width: 300px;
@@ -39,6 +39,11 @@ body {
     -webkit-text-stroke: 1px rgb(56, 106, 187); /* width and color */
 
     color: rgb(255, 204, 3);
+}
+
+#player-name {
+    font-size: 3rem;
+    -webkit-text-stroke: 3px rgb(56, 106, 187); /* width and color */
 }
 
 #end-status-wrapper {
