@@ -15,10 +15,10 @@ function init_cards() {
      * Shuffle Cards Array with The Fisher-Yates algorithm
      */
     function shuffle() {
-        for (var i = 0; i < number_of_cards / 2; i++) {
-            var index = i + Math.floor(Math.random() * (cards.length - i));
+        for (let i = 0; i < number_of_cards / 2; i++) {
+            let index = i + Math.floor(Math.random() * (cards.length - i));
 
-            var tmp = cards[i];
+            let tmp = cards[i];
             cards[i] = cards[index];
             cards[index] = tmp;
         }
@@ -31,7 +31,7 @@ function give_all_cards_background_image_number() {
 
     let card_numbers = [];
     while (card_numbers.length !== number_of_cards / 2) {
-        var random_kepszam = Math.floor(Math.random() * (20)) + 1;
+        let random_kepszam = Math.floor(Math.random() * (20)) + 1;
 
         if (!card_numbers.includes(random_kepszam)) {
             card_numbers.push(random_kepszam);

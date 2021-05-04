@@ -12,14 +12,14 @@ let seconds;
 
 let game_area;
 
-var victory_sound;
-var click_sound;
-var defeat_sound;
-var background_sound;
+let victory_sound;
+let click_sound;
+let defeat_sound;
+let background_sound;
 
 let player_name;
 
-var is_background_music_started = false;
+let is_background_music_started = false;
 
 function sound(src) {
     this.sound = document.createElement("audio");
