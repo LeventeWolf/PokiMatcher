@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>PokimonMatcher</title>
-    <script src="jquery-3.2.0.min.js"></script>
-    <script src="gamearea.js"></script> 
-    <script src="toplist.js"></script>
-    <script src="card.js"></script>
+    <script src="scripts/jquery-3.2.0.min.js"></script>
+    <script src="scripts/gamearea.js"></script>
+    <script src="scripts/toplist.js"></script>
+    <script src="scripts/card.js"></script>
     <link rel="stylesheet" href="styles/jatek.css"/>
     <link rel="stylesheet" href="styles/aside.css"/>
     <link rel="shortcut icon" type="image/x-icon" href="kepek/logo.png" />
@@ -28,8 +28,9 @@
             <img src="kepek/defeat.png" id="defeat" alt="defeat.png"/>
         </div>
         <div id="input-wrapper">
-            <img src="kepek/input.png" id="input-kep" alt="inputkep.png"/>
-            <input type="name" id="input-mezo" placeholder="your name">
+            <label id="player-name"> </label>
+<!--            <img src="kepek/input.png" id="input-kep" alt="inputkep.png"/>-->
+<!--            <input type="name" id="input-mezo" placeholder="your name">-->
         </div>
         <h2 id="matched"></h2>
     </div>
@@ -63,9 +64,6 @@
         </div>
     </div>
 </aside>
-
-
-
 
 
 

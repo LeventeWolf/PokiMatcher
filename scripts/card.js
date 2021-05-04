@@ -52,24 +52,33 @@ function init_kartyak_tomb() {
     }
 }
 
+
 function cardClick() {
+    if (!check_victory() && !check_defeat()) {
+        start_timer();
+    }
+
     let card = $(this)
 
     if (!is_this_card_already_facing_up(felforditottak)) {
         face_up_card(card);
         felforditottak_db += 1;
         felforditottak.push(card);
+
+        play_click_sound();
     }
 
     if (felforditottak_db === 2) {
         remove_all_card_onClick();
 
         if (is_flipped_cards_match(felforditottak[0], felforditottak[1])) {
+            play_matched_sound();
             remove_onClick_from_matched_cards(felforditottak);
             add_matched_cards_new_look(felforditottak);
             enable_all_card_onClick();
             increment_matched_pokies();
             check_victory();
+
             felforditottak_db = 0;
             felforditottak = [];
         } else {
@@ -82,12 +91,24 @@ function cardClick() {
         }
     }
 
+    function play_matched_sound() {
+        click_sound = new sound("media/matched.mp3")
+        click_sound.sound.volume = 0.3;
+        click_sound.play();
+    }
 
     /**
      * @returns true if the two flipped card match else false
      */
     function is_flipped_cards_match(card1, card2) {
         return card1.attr('szam') === card2.attr('szam');
+    }
+
+
+    function play_click_sound() {
+        click_sound = new sound("media/click.mp3")
+        click_sound.sound.volume = 0.3;
+        click_sound.play();
     }
 
     function remove_onClick_from_matched_cards(matched_cards) {
@@ -104,6 +125,16 @@ function cardClick() {
         if (matched_cards.length === 0) return false;
 
         return card.attr('id') === matched_cards[0].attr('id');
+    }
+}
+
+function start_timer() {
+    if (timer_interval == null){
+        timer_interval = setInterval(function () {
+            $('#timer').text('Time left: ' + --seconds);
+            check_defeat();
+        }, 1000);
+
     }
 }
 

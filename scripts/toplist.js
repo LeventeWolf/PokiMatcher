@@ -1,39 +1,41 @@
 let players = []
 
 /**
- * Initalize toplist includes...:
- * +clearing
- * +add player
- * +show top 3 players
- * +show player in the bottom
+ * Class that represents a Player
+ * A player has: name, points
  */
+class Player {
+    constructor(player_name, point) {
+        this.name = player_name;
+        this.point = point;
+    }
+}
+
 function init_toplist() {
     clear_toplist_view();
 
-    init_players();
+    add_player_to_localStorage();
 
-    add_player_to_toplist();
+    init_players_from_localStorage_in_ascending_order();
 
     show_toplist_top_three_players();
     show_toplist_current_player();
-}
 
-/**
- * get Players from localStorage
- */
-function init_players() {
-    for (let i = 0; i < localStorage.length; i++) {
-        let player = new Player(localStorage.key(i), parseInt(localStorage.getItem(localStorage.key(i))));
-        players[i] = player;
-    }
-    players.sort(compare);
-    function compare(player1, player2) {
-        if (player1.point < player2.point) {
-            return 1;
-        } else if (player1.point > player2.point) {
-            return -1
-        } else {
-            return 0;
+    function init_players_from_localStorage_in_ascending_order() {
+        for (let i = 0; i < localStorage.length; i++) {
+            let player = new Player(localStorage.key(i), parseInt(localStorage.getItem(localStorage.key(i))));
+            players[i] = player;
+        }
+        players.sort(compare);
+
+        function compare(player1, player2) {
+            if (player1.point < player2.point) {
+                return 1;
+            } else if (player1.point > player2.point) {
+                return -1
+            } else {
+                return 0;
+            }
         }
     }
 }
@@ -59,11 +61,10 @@ function clear_toplist_view() {
  * Store the player in localStorage
  * Overrides old points
  * */
-function add_player_to_toplist() {
-    let player_name = document.getElementById('input-mezo').value;
-    if (player_name.length === 0) player_name = "guest";
+function add_player_to_localStorage() {
+    console.log(player_name);
 
-    console.log("player neve: " + player_name)
+    if (player_name.length === 0) player_name = "anonymus";
 
     let player_point = calculate_player_point();
 
@@ -94,22 +95,17 @@ function show_toplist_top_three_players() {
  * Display the player point in the bottom of the toplist
  * */
 function show_toplist_current_player() {
-    let player_name = document.getElementById('input-mezo').value;
     if (player_name.length === 0) player_name = "guest";
 
     let player_point = calculate_player_point();
 
     let player = new Player(player_name, player_point);
 
-    let player_rank = 0;
-    for (let $player of players) {
-        player_rank++;
-        if ($player.name === player_name) break;
-    }
+    let player_rank = calculate_player_rank(player);
 
     $('#player-point-table').empty();
     let row = $('<tr class="row"></tr>')
-    let rank = $('<td class="rank"></td>').append(player_rank.toString() + ".");
+    let rank = $('<td class="rank"></td>').append(player_rank + ".");
     let name = $('<td class="name"></td>').append(player.name);
     let point = $('<td class="point"></td>').append(player.point);
 
@@ -125,4 +121,14 @@ function show_toplist_current_player() {
 function calculate_player_point() {
     let second_left = seconds === 0 ? 1 : seconds;
     return second_left * matched;
+}
+
+function calculate_player_rank(my_player){
+    let player_rank = 0;
+    for (let other_player of players) {
+        player_rank++;
+        if (other_player.name === my_player.name) break;
+    }
+
+    return player_rank;
 }
