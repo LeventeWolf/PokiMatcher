@@ -16,8 +16,8 @@ function init_kartyak_tomb() {
     }
 
     for (let i = 0; i < kartyaszamok.length; i++) {
-        kartya = $('<img src="kepek/hatlap2.png" class="kartya">');
-        kartya2 = $('<img src="kepek/hatlap2.png" class="kartya">');
+        kartya = $('<img src="assets/hatlap2.png" class="kartya">');
+        kartya2 = $('<img src="assets/hatlap2.png" class="kartya">');
 
         kartya.attr('szam', kartyaszamok[i]);
         kartya2.attr('szam', kartyaszamok[i]);
@@ -155,16 +155,16 @@ function add_matched_cards_new_look(matched_cards) {
     matched_cards[0].css({border: '3px solid #9ecaed'});
     matched_cards[1].css({border: '3px solid #9ecaed'});
 
-    matched_cards[0].css({cursor: 'url(kepek/closed.png), auto'})
-    matched_cards[1].css({cursor: 'url(kepek/closed.png), auto'})
+    matched_cards[0].css({cursor: 'url(assets/closed.png), auto'})
+    matched_cards[1].css({cursor: 'url(assets/closed.png), auto'})
 }
 
 function is_card_facing_down(card) {
-    return card.attr('src') === 'kepek/hatlap2.png';
+    return card.attr('src') === 'assets/hatlap2.png';
 }
 
 function is_card_facing_up(card) {
-    return card.attr('src') !== 'kepek/hatlap2.png';
+    return card.attr('src') !== 'assets/hatlap2.png';
 }
 
 function remove_all_card_onClick() {
@@ -214,14 +214,14 @@ function flip_off_cards() {
 }
 
 function face_down_card(card) {
-    card.attr('src', 'kepek/hatlap2.png');
+    card.attr('src', 'assets/hatlap2.png');
     card.removeClass('rotation');
-    $('.card:hover').css({cursor: 'url(kepek/closed.png), auto'})
+    $('.card:hover').css({cursor: 'url(assets/closed.png), auto'})
 }
 
 function face_up_card(card) {
     var cardID = card.attr('szam');
-    card.attr('src', 'kepek/pokimonok/kep' + cardID + '.png');
+    card.attr('src', 'assets/pokimonok/kep' + cardID + '.png');
     card.addClass('rotation');
-    $('.card:hover').css({cursor: 'url(kepek/half-open.png), auto'})
+    $('.card:hover').css({cursor: 'url(assets/half-open.png), auto'})
 }
